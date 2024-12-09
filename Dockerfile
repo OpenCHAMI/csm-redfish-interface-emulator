@@ -28,7 +28,7 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-FROM artifactory.algol60.net/docker.io/library/alpine:3.17 AS base
+FROM cgr.dev/chainguard/wolfi-base AS base
 
 COPY src/requirements.txt /app/requirements.txt
 
@@ -43,8 +43,6 @@ RUN set -ex \
         openssl-dev \
         libffi-dev \
         gcc \
-        musl-dev \
-        cargo \
         curl \
     && pip3 install --upgrade \
         pip \
@@ -57,9 +55,8 @@ RUN set -ex \
         gcc \
         python3-dev \
         openssl-dev \
-        libffi-dev \
-        musl-dev \
-        cargo
+        libffi-dev
+
 
 # Insert our emulator extentions
 COPY src /app
